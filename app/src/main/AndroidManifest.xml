@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.user.mya">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:replace="android:icon"
+        android:name=".MyApli.MyAplication"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Activity.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Activity.Activity_LiveMain"
+                  android:theme="@style/AppTheme.NONO"/>
+
+        <activity android:name=".Activity.Activity_CommentMain"
+                  android:theme="@style/AppTheme.NONO"/>
+
+        <activity android:name=".Activity.Activity_Xiangxi"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+        <!--QQ登录开始-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="1105177443" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.Activity_Duanxin"/>
+
+        <activity android:name=".Activity.Activity_ZanZhuMe"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.Activity_RecordMain"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--QQ登录结束-->
+
+
+    </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="cn.bmob.permission.push"/><!-- 添加自定义的权限-->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+
+    <!--允许联网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--获取sd卡写的权限，用于文件上传和下载-->
+
+    <!--允许读取手机状态 用于创建BmobInstallation-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!--支付-->
+
+    <!--推送所需的权限-->
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!--推送-->
+    <service
+        android:label="PushService"
+        android:name="cn.bmob.push.lib.service.PushService"
+        android:process=":bmobpush"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="cn.bmob.push.lib.service.PushService"/>
+        </intent-filter>
+    </service>
+
+    <!-- 用于进程保活 -->
+    <service
+        android:name="cn.bmob.push.lib.service.PushNotifyService"
+        android:process=":bmobpush" >
+    </service>
+
+    <receiver android:name="cn.bmob.push.PushReceiver" >
+        <intent-filter>
+            <!-- 系统启动完成后会调用 -->
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <!-- 解锁完成后会调用 -->
+            <action android:name="android.intent.action.USER_PRESENT" />
+            <!-- 监听网络连通性 -->
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+        </intent-filter>
+    </receiver>
+
+    <!-- 第四部中创建的消息接收器，在这里进行注册 -->
+    <receiver android:name="com.example.user.mya.Receiver.MyPushMessageReceiver">
+        <intent-filter >
+            <action android:name="cn.bmob.push.action.MESSAGE"/>
+        </intent-filter>
+    </receiver>
+
+    <!-- 接收心跳和唤醒的广播，要和PushService运行在同个进程 -->
+    <receiver
+        android:name="cn.bmob.push.PushNotifyReceiver"
+        android:process=":bmobpush" >
+        <intent-filter>
+            <!-- 接收心跳广播的action -->
+            <action android:name="cn.bmob.push.action.HEARTBEAT" />
+            <!-- 接收唤醒广播的action -->
+            <action android:name="cn.bmob.push.action.NOTIFY" />
+        </intent-filter>
+    </receiver>
+</manifest>

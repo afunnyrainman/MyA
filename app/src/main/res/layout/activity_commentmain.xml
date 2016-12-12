@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lanse"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/lanse">
+
+        <ImageView
+            android:id="@+id/top_tv_left"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_back"/>
+
+        <TextView
+            android:id="@+id/RecordTopTiele"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/top_tv_left"
+            android:text=""
+            android:textSize="20dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RlSend"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_send"
+            android:text="发送"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:singleLine="true"
+            android:layout_toLeftOf="@id/tv_send"
+            android:hint="说点什么吧...."
+            android:id="@+id/EdComment"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/re_top"
+        android:layout_above="@id/RlSend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+         <include layout="@layout/activity_livemain_incloud" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
